@@ -15,9 +15,12 @@ class LiquidTitleView: UIView {
     
     private let label = UILabel()
     private let glassView: UIVisualEffectView = {
-        // Use UIGlassEffect for the iOS 26 "Liquid" look
+        #if compiler(>=6.2)
         let effect = UIGlassEffect()
         return UIVisualEffectView(effect: effect)
+        #else
+        return UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+        #endif
     }()
     
     @objc
