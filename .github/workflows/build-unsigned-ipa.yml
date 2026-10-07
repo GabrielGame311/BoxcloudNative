@@ -21,6 +21,9 @@ jobs:
       - name: Install Tuist
         run: mise use --global tuist@4.178.1
 
+      - name: Configure Swift package registry
+        run: tuist registry setup
+
       - name: Generate Xcode workspace
         run: tuist generate --no-open
 
