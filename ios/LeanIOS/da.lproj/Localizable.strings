@@ -1,0 +1,23 @@
+/* iOS Button: Cancel */
+"button-cancel" = "Annuller";
+
+/* iOS Button: OK */
+"button-ok" = "OK";
+
+/* iOS Button: View */
+"button-view" = "Vis";
+
+/* iOS Button: Menu */
+"button-menu" = "Menu";
+
+/* Button: Copy Link */
+"button-copy-link" = "Kopiér linkadresse";
+
+/* Button: Open External */
+"button-open-external" = "Åbn link i ekstern browser";
+
+/* Button: Share External */
+"button-share-link" = "Del link";
+
+/* Button: Done */
+"button-done" = "Færdig";
