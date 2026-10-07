@@ -2387,6 +2387,14 @@ static NSInteger _currentWindows = 0;
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
+    NSString *normalizedMessage = message.lowercaseString;
+    if ([normalizedMessage containsString:@"median.co"] &&
+        [normalizedMessage containsString:@"debug mode"] &&
+        [normalizedMessage containsString:@"activat"]) {
+        completionHandler();
+        return;
+    }
+
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"button-ok", @"Button: OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         completionHandler();
