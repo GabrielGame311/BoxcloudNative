@@ -22,7 +22,7 @@ jobs:
         run: mise use --global tuist@4.178.1
 
       - name: Configure Swift package registry
-        run: tuist registry setup
+        run: swift package-registry set --scope median --global https://tuist.dev/registry
 
       - name: Generate Xcode workspace
         run: tuist generate --no-open
