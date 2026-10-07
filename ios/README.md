@@ -40,6 +40,12 @@ Or build from the command line:
 tuist build Median
 ```
 
+### Build an unsigned IPA with GitHub Actions
+
+Open the **Build unsigned IPA** workflow in the repository's Actions tab and select **Run workflow**. When it finishes, download the `BoxCloud-unsigned-ipa` artifact from the workflow run.
+
+The IPA is unsigned and must be signed before it can be installed on a device.
+
 ### Additional Commands
 
 - `tuist clean` - Clean generated files

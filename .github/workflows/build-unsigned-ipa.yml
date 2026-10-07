@@ -1,0 +1,51 @@
+name: Build unsigned IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: ios
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Tuist
+        uses: jdx/mise-action@v2
+        with:
+          install: false
+
+      - name: Install Tuist
+        run: mise use --global tuist@4.178.1
+
+      - name: Generate Xcode workspace
+        run: tuist generate --no-open
+
+      - name: Build unsigned app
+        run: >-
+          xcodebuild
+          -workspace MedianIOS.xcworkspace
+          -scheme Median
+          -configuration Release
+          -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          -derivedDataPath build
+          CODE_SIGNING_ALLOWED=NO
+          build
+
+      - name: Package IPA
+        run: |
+          mkdir -p package/Payload
+          cp -R build/Build/Products/Release-iphoneos/Median.app package/Payload/
+          cd package
+          /usr/bin/zip -qry ../BoxCloud-unsigned.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: BoxCloud-unsigned-ipa
+          path: ios/BoxCloud-unsigned.ipa
+          if-no-files-found: error
