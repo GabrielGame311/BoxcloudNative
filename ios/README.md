@@ -44,6 +44,8 @@ tuist build Median
 
 Open the **Build unsigned IPA** workflow in the repository's Actions tab and select **Run workflow**. When it finishes, download the `BoxCloud-unsigned-ipa` artifact from the workflow run.
 
+The repository must have an Actions secret named `MEDIAN_SPM_TOKEN` with access to `https://packages.median.co` so Tuist can resolve its private Swift packages.
+
 The IPA is unsigned and must be signed before it can be installed on a device.
 
 ### Additional Commands

@@ -22,10 +22,12 @@ jobs:
         run: mise use --global tuist@4.178.1
 
       - name: Configure Swift package registry
-        run: swift package-registry set --scope median --global https://tuist.dev/registry
+        run: swift package-registry set --scope median --global https://packages.median.co
 
       - name: Generate Xcode workspace
         run: tuist generate --no-open
+        env:
+          SWIFTPM_REGISTRY_TOKEN: ${{ secrets.MEDIAN_SPM_TOKEN }}
 
       - name: Build unsigned app
         run: >-
@@ -38,6 +40,8 @@ jobs:
           -derivedDataPath build
           CODE_SIGNING_ALLOWED=NO
           build
+        env:
+          SWIFTPM_REGISTRY_TOKEN: ${{ secrets.MEDIAN_SPM_TOKEN }}
 
       - name: Package IPA
         run: |
